@@ -36,4 +36,26 @@ describe('RoundCard', () => {
     render(<RoundCard round={settledRound} />)
     expect(screen.getByTestId('status').textContent).toBe('settled')
   })
+
+  it('renders an evidence-first bounty audit instead of raw JSON', () => {
+    render(<RoundCard round={{
+      ...settledRound,
+      want: { service: 'bounty-audit', arg: 'https://github.com/acme/repo/issues/7', budgetSol: 0.001 },
+      delivered: {
+        raw: 'DELIVERED round=1 data={...}',
+        data: {
+          service: 'bounty-audit',
+          target: { title: 'Pay for the parser', url: 'https://github.com/acme/repo/issues/7' },
+          repository: { name: 'acme/repo', stars: 42 },
+          competition: { attemptingUsers: 3, linkedPullRequests: 2 },
+          riskScore: 45,
+          recommendation: 'VERIFY_FIRST',
+          risks: [{ severity: 'high', code: 'competition', evidence: 'Three active attempts.' }],
+        },
+      },
+    }} />)
+    expect(screen.getByTestId('bounty-audit').textContent).toContain('VERIFY FIRST')
+    expect(screen.getByTestId('bounty-audit').textContent).toContain('45/100 risk')
+    expect(screen.queryByText('DELIVERED round=1 data={...}')).toBeNull()
+  })
 })
