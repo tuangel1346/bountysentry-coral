@@ -69,6 +69,25 @@ body { margin: 0; background: var(--bg); color: var(--txt); }
 .wc-call strong { color: var(--premium); }
 .wc-conf { color: var(--dim); }
 
+/* Evidence-backed GitHub bounty delivery */
+.audit-panel { border: 1px solid var(--link); border-radius: 10px; padding: 12px; margin: 6px 0 10px; background: var(--bg); }
+.audit-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.audit-head h2 { font-size: 14px; margin: 7px 0 3px; }
+.audit-head a { color: var(--link); font-size: 11px; text-decoration: none; }
+.audit-verdict { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 7px; font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+.verdict-go { color: var(--won); } .verdict-verify_first { color: var(--premium); } .verdict-no_go { color: var(--refund); }
+.audit-score { text-align: right; min-width: 70px; }
+.audit-score strong { display: block; color: var(--premium); font-size: 25px; line-height: 1; }
+.audit-score span { color: var(--dim); font-size: 10px; }
+.risk-track { height: 5px; background: var(--panel); border-radius: 9px; overflow: hidden; margin: 12px 0; }
+.risk-track div { height: 100%; background: linear-gradient(90deg, var(--won), var(--premium), var(--refund)); }
+.audit-stats { display: flex; gap: 15px; color: var(--dim); font-size: 11px; }
+.audit-stats b { color: var(--txt); }
+.audit-risks { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 5px; font-size: 11px; color: var(--dim); }
+.audit-risks li { border-left: 3px solid var(--line); padding-left: 8px; }
+.audit-risks .risk-high { border-color: var(--refund); } .audit-risks .risk-medium { border-color: var(--premium); } .audit-risks .risk-low { border-color: var(--link); }
+.audit-next { border-top: 1px dashed var(--line); margin: 11px 0 0; padding-top: 9px; font-size: 12px; }
+
 /* Walkthrough / explainer */
 .explain { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin: 0 0 16px; }
 .explain-lead { margin: 0 0 10px; color: var(--dim); font-size: 13.5px; line-height: 1.55; }

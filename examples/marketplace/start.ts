@@ -102,12 +102,13 @@ async function main() {
 
   // F8: a txline market needs both the World Cup token AND the worldcup seller. If .env still says
   // BUYER_SERVICE=txline but no token is present (e.g. a stale .env after a failed mint), fall back to
-  // the generic market rather than broadcasting txline WANTs nothing can fill.
-  const wantsTxline = (env.BUYER_SERVICE ?? 'coingecko') === 'txline'
+  // the BountySentry market rather than broadcasting txline WANTs nothing can fill.
+  const wantsTxline = (env.BUYER_SERVICE ?? 'bounty-audit') === 'txline'
   const fellBack = wantsTxline && !txlineKey
-  if (fellBack) console.warn('[marketplace] BUYER_SERVICE=txline but no TXLINE_API_KEY — falling back to coingecko.')
-  const buyerService = fellBack ? 'coingecko' : (env.BUYER_SERVICE ?? 'coingecko')
-  const buyerArg = fellBack ? 'SOL-USDC' : (env.BUYER_ARG ?? 'SOL-USDC')
+  if (fellBack) console.warn('[marketplace] BUYER_SERVICE=txline but no TXLINE_API_KEY — falling back to bounty-audit.')
+  const buyerService = fellBack ? 'bounty-audit' : (env.BUYER_SERVICE ?? 'bounty-audit')
+  const defaultBounty = 'https://github.com/David-patrick-chuks/Riona-AI-Agent/issues/118'
+  const buyerArg = fellBack ? defaultBounty : (env.BUYER_ARG ?? defaultBounty)
   const buyerArgs = fellBack ? '' : (env.BUYER_ARGS ?? '')
 
   const buyerOpts: Record<string, unknown> = {

@@ -1,4 +1,45 @@
-# solana_coralOS — the Agent Marketplace
+# BountySentry Coral — agent-to-agent bounty intelligence
+
+> A buyer agent purchases an evidence-backed GitHub bounty audit from competing seller agents;
+> CoralOS coordinates the auction and Solana escrow pays only after the report is delivered.
+
+BountySentry answers a costly question before an autonomous developer starts work: **is this bounty
+worth pursuing?** Given a public GitHub issue URL, the winning seller checks assignment, competing
+claims and pull requests, repository health, and visible payment evidence. It returns a reproducible
+`GO`, `VERIFY_FIRST`, or `NO_GO` report with a 0–100 risk score.
+
+The default demo requires no paid data source and remains useful without an LLM key: evidence
+collection and risk scoring are deterministic, while an available model adds a concise rationale and
+next action. The complete market lifecycle is:
+
+```text
+WANT → BID × N → AWARD → DEPOSITED → DELIVERED → RELEASED
+```
+
+All settlement uses free **Solana devnet** funds. This project is built from the Imperial AI Agent
+Hackathon starter and preserves its original multi-service examples and documentation below.
+
+## BountySentry quick start
+
+```sh
+node scripts/setup.js                    # creates two local devnet wallets
+# fund both public addresses at https://faucet.solana.com — never send real SOL
+npm run dev                              # build, coordinate agents, open dashboard
+```
+
+Click **Audit a bounty**. Override the sample at launch with `BUYER_ARG=https://github.com/OWNER/REPO/issues/NUMBER`.
+The seller implementation is in
+[`bountyAudit.ts`](coral-agents/seller-agent/src/bountyAudit.ts); the evidence delivery UI is in
+[`BountyAuditPanel.tsx`](examples/marketplace/web/src/components/BountyAuditPanel.tsx).
+
+On native Linux, `examples/agent-economy/config/coral.toml` uses Docker's default bridge gateway
+(`172.17.0.1`). Docker Desktop users can change `[docker].address` to `host.docker.internal`.
+
+---
+
+## Upstream starter documentation
+
+### solana_coralOS — the Agent Marketplace
 
 > An open market where **LLM agents** compete in a shared **CoralOS** session and settle every deal
 > through a **Solana escrow contract**. Reason · coordinate · settle trustlessly.

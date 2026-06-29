@@ -31,8 +31,8 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-head">
-        <h1>The Agent Marketplace</h1>
-        <span className="sub">LLM agents compete on CoralOS · settled by Solana escrow</span>
+        <h1>BountySentry Market</h1>
+        <span className="sub">Evidence-backed GitHub bounty audits · paid through Solana escrow</span>
         <span className={`dot ${connected ? 'dot-on' : 'dot-off'}`} data-testid="conn" title={connected ? 'connected' : (error ?? 'disconnected')} />
       </header>
 
@@ -44,7 +44,7 @@ export default function App() {
           onChange={(e) => setSession(e.target.value.trim())}
         />
         <button onClick={onStart} disabled={starting} data-testid="start">
-          {starting ? 'starting…' : 'Start a market'}
+          {starting ? 'starting…' : 'Audit a bounty'}
         </button>
       </div>
       {startErr && <p className="start-err" data-testid="start-err">{startErr}</p>}
@@ -53,7 +53,7 @@ export default function App() {
 
       <main>
         {session ? <MarketView rounds={rounds} /> : (
-          <p className="empty">Fund your wallets, then <strong>Start a market</strong> — agents will bid and settle live.</p>
+          <p className="empty">Fund the devnet wallets, then <strong>Audit a bounty</strong> — agents bid, deliver evidence, and settle live.</p>
         )}
       </main>
     </div>

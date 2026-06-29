@@ -3,6 +3,7 @@ import { StatusPill } from './StatusPill'
 import { BidRow, DeclinedRow } from './BidRow'
 import { SettlementBadge } from './SettlementBadge'
 import { WorldCupPanel } from './WorldCupPanel'
+import { BountyAuditPanel } from './BountyAuditPanel'
 
 /** One auction round: the need, the competing bids, the award + reasoning, and on-chain settlement. */
 export function RoundCard({ round }: { round: Round }) {
@@ -38,7 +39,9 @@ export function RoundCard({ round }: { round: Round }) {
       {round.delivered && (
         (round.delivered.data as { service?: string } | undefined)?.service === 'txline-edge'
           ? <WorldCupPanel edge={round.delivered.data as Parameters<typeof WorldCupPanel>[0]['edge']} />
-          : <pre className="delivered" data-testid="delivered">{round.delivered.raw}</pre>
+          : (round.delivered.data as { service?: string } | undefined)?.service === 'bounty-audit'
+            ? <BountyAuditPanel audit={round.delivered.data as Parameters<typeof BountyAuditPanel>[0]['audit']} />
+            : <pre className="delivered" data-testid="delivered">{round.delivered.raw}</pre>
       )}
 
       <footer className="settle-row">

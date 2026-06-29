@@ -14,7 +14,7 @@ expression = "MIT"
 [options]
 SELLER_WALLET = { type = "string", description = "Devnet wallet pubkey that receives payments" }
 AGENT_NAME = { type = "string", default = "seller-lazy", description = "Market identity (matches the registry name)" }
-SERVICES = { type = "string", default = "inference", description = "Inventory — only bids on these (sits out everything else)" }
+SERVICES = { type = "string", default = "inference", description = "Inventory — deliberately excludes bounty-audit, so this seller visibly declines" }
 FLOOR_SOL = { type = "f64", default = 0.0004, description = "Cost floor — the LLM may never bid below this" }
 PERSONA = { type = "string", default = "a picky specialist who only bids on high-value inference jobs and ignores the rest", description = "Bidding persona (LLM system prompt)" }
 SERVICE = { type = "string", default = "inference", description = "What deliverService returns: jupiter | coingecko | news | inference" }

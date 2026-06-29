@@ -6,7 +6,9 @@
 //
 // Default: Jupiter DEX swap quote (SOL → USDC) — no API key needed
 
-const KNOWN_SERVICES = new Set(['jupiter', 'coingecko', 'news', 'inference', 'claude', 'txline'])
+import { auditGitHubBounty } from './bountyAudit.js'
+
+const KNOWN_SERVICES = new Set(['bounty-audit', 'jupiter', 'coingecko', 'news', 'inference', 'claude', 'txline'])
 
 export async function deliverService(request: string): Promise<string> {
   // The request may NAME a service as its first token — that's how the human checkout's
@@ -20,6 +22,8 @@ export async function deliverService(request: string): Promise<string> {
   const payload = named ? rest.join(' ') : request
 
   switch (service) {
+    case 'bounty-audit':
+      return auditGitHubBounty(payload)
     case 'jupiter':
       return jupiterSwapQuote(payload)
     case 'coingecko':

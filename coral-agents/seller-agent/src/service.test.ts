@@ -48,4 +48,19 @@ describe('deliverService routing', () => {
     const out = JSON.parse(await deliverService('what is the price right now'))
     expect(out.coin).toBe('solana') // used env=coingecko, not the words in the request
   })
+
+  it('routes bounty-audit requests to the GitHub due-diligence service', async () => {
+    global.fetch = vi.fn(async (input: string | URL | Request) => {
+      const url = String(input)
+      const body = url.endsWith('/repos/acme/project')
+        ? { full_name: 'acme/project', html_url: 'https://github.com/acme/project', created_at: '2020-01-01T00:00:00Z', pushed_at: new Date().toISOString(), stargazers_count: 100, forks_count: 5, open_issues_count: 2, archived: false, fork: false, owner: { login: 'acme' } }
+        : url.includes('/comments') || url.includes('/timeline')
+          ? []
+          : { title: 'Small fix', state: 'open', html_url: 'https://github.com/acme/project/issues/1', created_at: '2026-01-01T00:00:00Z', updated_at: '2026-01-02T00:00:00Z', comments: 0, assignees: [], labels: [{ name: 'bounty' }], user: { login: 'owner' } }
+      return { ok: true, json: async () => body } as Response
+    }) as typeof fetch
+    const out = JSON.parse(await deliverService('bounty-audit https://github.com/acme/project/issues/1'))
+    expect(out.service).toBe('bounty-audit')
+    expect(out.target.title).toBe('Small fix')
+  })
 })

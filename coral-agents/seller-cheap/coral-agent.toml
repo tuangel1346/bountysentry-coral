@@ -14,10 +14,10 @@ expression = "MIT"
 [options]
 SELLER_WALLET = { type = "string", description = "Devnet wallet pubkey that receives payments" }
 AGENT_NAME = { type = "string", default = "seller-cheap", description = "Market identity (matches the registry name)" }
-SERVICES = { type = "string", default = "jupiter,coingecko", description = "Inventory — comma-separated services this seller bids on" }
+SERVICES = { type = "string", default = "bounty-audit,jupiter,coingecko", description = "Inventory — comma-separated services this seller bids on" }
 FLOOR_SOL = { type = "f64", default = 0.0002, description = "Cost floor — the LLM may never bid below this" }
 PERSONA = { type = "string", default = "an aggressive discounter who bids low to win volume, but never below the floor", description = "Bidding persona (LLM system prompt)" }
-SERVICE = { type = "string", default = "coingecko", description = "What deliverService returns: jupiter | coingecko | news | inference" }
+SERVICE = { type = "string", default = "bounty-audit", description = "What deliverService returns" }
 SOLANA_RPC_URL = { type = "string", default = "", description = "Solana RPC URL (devnet)" }
 ESCROW_DEADLINE_SECS = { type = "f64", default = 600, description = "Refund deadline for escrow deposits (seconds)" }
 ANTHROPIC_API_KEY = { type = "string", default = "", description = "Anthropic key (default brain)" }
